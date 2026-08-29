@@ -21,19 +21,48 @@
 
 ## Настройка `build.gradle`
 
-Для составления отчётов по покрытию тестами вашего кода, необходимо подключить в ваш gradle скрипт плагин `jacoco`. Для этого:
-- Добавьте строчку `id 'jacoco'` в плагины
-```Groovy
-plugins {
-    id 'java'
-    id 'jacoco'
-}
-```
-- Измените задачу `jacocoTestReport`, чтобы она генерировала отчёт в формате `.xml`, а не только `.html` (достаточно скопировать код в конец вашего `build.gradle`)
-```Groovy
-jacocoTestReport {
-    reports {
-        xml.required = true
+Для составления отчётов по покрытию тестами вашего кода необходимо подключить в Gradle-скрипт плагин `jacoco`.
+
+Для этого:
+
+- Добавьте плагин `jacoco`.
+
+  - `build.gradle.kts` (Kotlin)
+
+    ```kotlin
+    plugins {
+        id("java")
+        id("jacoco")
     }
-}
-```
+    ```
+
+  - `build.gradle` (Groovy)
+
+    ```groovy
+    plugins {
+        id 'java'
+        id 'jacoco'
+    }
+    ```
+
+- Измените задачу `jacocoTestReport`, чтобы она генерировала отчёт в формате `.xml`, а не только `.html` (достаточно скопировать соответствующий код в конец вашего Gradle-скрипта).
+
+  - `build.gradle.kts` (Kotlin)
+
+    ```kotlin
+    tasks.jacocoTestReport {
+        reports {
+            xml.required.set(true)
+        }
+    }
+    ```
+
+  - `build.gradle` (Groovy)
+
+    ```groovy
+    jacocoTestReport {
+        reports {
+            xml.required = true
+        }
+    }
+    ```
